@@ -9,10 +9,10 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Fonts: Playfair Display & Manrope -->
+    <!-- Fonts: Playfair Display & DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -29,7 +29,7 @@
                     },
                     fontFamily: {
                         display: ['"Playfair Display"', 'serif'], 
-                        sans: ['"Manrope"', 'sans-serif'],
+                        sans: ['"DM Sans"', 'sans-serif'],
                     },
                     letterSpacing: {
                         widest: '.25em',
@@ -60,10 +60,10 @@
         }
     </script>
     <style>
-        /* Base Styles */
-        body { background-color: #050505; color: #050505; overflow-x: hidden; } /* Start black for intro */
+        /* Base Styles - Start with Brand Color Background to avoid black flash */
+        body { background-color: #A92654; color: #050505; overflow-x: hidden; }
 
-        /* Intro Overlay */
+        /* Intro Overlay - Brand Color Background */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background-color: #A92654; z-index: 2147483647;
@@ -113,9 +113,16 @@
         
         /* Video Container for Layering */
         .video-background {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 80%; height: 80%; z-index: 0; /* Behind Text */
-            opacity: 0.9; pointer-events: none;
+            position: absolute; 
+            top: 35%; /* Moved UP from 50% to reduce top spacing */
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            width: 100%; 
+            height: 100%; 
+            z-index: 0; /* Behind Text */
+            opacity: 0.9; 
+            pointer-events: none;
+            overflow: hidden; /* Ensure zoomed video doesn't overflow */
         }
         
         /* Delays */
@@ -143,7 +150,7 @@
     <!-- INTRO OVERLAY -->
     <div id="intro-overlay" onclick="startExperience()">
         <div id="intro-logo" class="mb-8 transition-transform duration-700">
-            <!-- Logo for Intro Screen - using removebg version, inverted for white on magenta -->
+            <!-- White Logo for Magenta Background -->
             <img src="./noxha-logo-removebg-preview.png" alt="NOXHA" class="w-24 h-24 object-contain brightness-0 invert">
         </div>
         <div class="text-white text-center pointer-events-none transition-opacity duration-300" id="tap-text">
@@ -163,7 +170,6 @@
 
         <!-- Navigation -->
         <nav class="fixed w-full z-50 px-6 py-6 flex justify-between items-center bg-white/90 backdrop-blur-md border-b border-border transition-all duration-300">
-            <!-- LOGO IN TOP LEFT CORNER -->
             <a href="#" class="block hover:scale-105 transition-transform duration-300 cursor-hover flex items-center gap-3">
                 <img src="./noxha-logo.png" alt="NOXHA" class="w-10 h-10 md:w-12 md:h-12 object-contain" onerror="this.style.display='none'; document.getElementById('logo-text').style.display='block';">
                 <span id="logo-text" class="hidden text-2xl font-display font-bold tracking-tighter text-black">NOXHA</span>
@@ -194,7 +200,8 @@
             
             <!-- VIDEO ANIMATION (Behind Text) -->
             <div class="video-background">
-                <video autoplay muted playsinline loop class="w-full h-full object-contain">
+                <!-- Added scale-125 to zoom in (crop) and object-contain to keep ratio -->
+                <video autoplay muted playsinline loop class="w-full h-full object-contain scale-125 transform origin-center">
                     <source src="./fins%20noxha.mp4" type="video/mp4">
                 </video>
             </div>
