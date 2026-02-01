@@ -1,449 +1,608 @@
-                <!DOCTYPE html>
-<html lang="en" class="scroll-smooth cursor-none">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOXHA | Studio</title>
-    <meta name="description" content="NOXHA is a creative studio in Pune specializing in Brand Design, Photography, and Cinematic Film.">
+    <title>Studio NOXHA | Visual Roadmap</title>
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fonts: Playfair Display & DM Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. CORE STYLES --- */
+        :root {
+            --bg-white: #FFFFFF;
+            --noxha-magenta: #AE3854;
+            --rich-black: #221F20;
+            --light-grey: #F9F9F9;
+            --border-color: #EAEAEA;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--rich-black);
+            font-family: 'Manrope', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- GLOBAL TEXT HOVER EFFECTS --- */
+        h1, h2, h3, h4, p, span, li {
+            transition: color 0.3s ease, opacity 0.3s ease;
+            cursor: default;
+        }
+        
+        h1:hover, h2:hover, h3:hover { color: var(--noxha-magenta); }
+        p:hover, li:hover { color: black; }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            color: var(--rich-black);
+            margin: 0;
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            line-height: 1.8;
+            color: #555;
+            font-size: 1.05rem;
+            font-weight: 300;
+        }
+
+        /* --- 2. NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .logo img { height: 40px; display: block; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--rich-black);
+            margin-left: 45px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--noxha-magenta); }
+
+        /* --- 3. HERO --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-video {
+            width: 300px;
+            height: auto;
+            mix-blend-mode: multiply;
+            margin-bottom: 40px;
+        }
+
+        .hero-separator {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
+            color: #666;
+            font-family: 'Manrope';
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        
+        .hero-separator::before, .hero-separator::after {
+            content: ""; flex: 1; height: 2px; background-color: var(--noxha-magenta);
+        }
+        .hero-separator span { padding: 0 20px; }
+
+        .hero-description {
+            font-size: 1.1rem; line-height: 1.8; color: #555; max-width: 750px; margin-bottom: 50px;
+        }
+
+        .hero-buttons {
+            display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap;
+        }
+
+        .btn-inquire {
+            text-decoration: none; color: var(--rich-black); font-weight: 800; font-size: 0.9rem;
+            letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.3s;
+        }
+        .btn-inquire .bracket { color: var(--noxha-magenta); font-size: 1.2rem; font-weight: 700; margin: 0 5px; }
+        .btn-inquire:hover { color: var(--noxha-magenta); }
+
+        .btn-download {
+            text-decoration: none; color: var(--rich-black); border: 1px solid var(--rich-black);
+            padding: 18px 35px; border-radius: 50px; font-weight: 700; font-size: 0.85rem;
+            letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s;
+            display: inline-flex; align-items: center; gap: 10px;
+        }
+        .btn-download:hover { background-color: var(--rich-black); color: white; border-color: var(--rich-black); }
+
+        /* --- 4. SECTIONS COMMON --- */
+        .section-padding { padding: 120px 5%; }
+
+        /* --- 5. SERVICES (LIST STYLE) --- */
+        .services-header-new {
+            display: flex; justify-content: space-between; align-items: baseline;
+            margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #EAEAEA;
+        }
+        .services-title-main { font-size: 4rem; font-weight: 400; color: var(--rich-black); font-family: 'Cormorant Garamond', serif; }
+        .services-subtitle {
+            font-family: 'Manrope'; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.2em;
+            color: var(--noxha-magenta); text-transform: uppercase;
+        }
+        
+        .services-list { display: flex; flex-direction: column; }
+        
+        .service-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 50px 0; border-bottom: 1px solid #EAEAEA; transition: all 0.3s ease;
+        }
+        
+        .service-left { flex: 1; }
+        .service-left h3 {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 0;
+            color: var(--noxha-magenta);
+        }
+
+        .service-mid { flex: 2; padding: 0 40px; }
+        .service-mid p { 
+            margin: 0; 
+            font-size: 1.1rem; 
+            color: var(--rich-black); 
+            font-family: 'Cormorant Garamond', serif; 
+            font-style: italic; 
+            font-weight: 700;
+        }
+        
+        .service-right { flex: 0 0 50px; display: flex; justify-content: flex-end; }
+        .arrow-circle {
+            width: 50px; height: 50px; border: 1px solid #ccc; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; color: #999; transition: all 0.3s ease;
+        }
+        
+        .service-row:hover .service-left h3 { opacity: 0.8; }
+        .service-row:hover .arrow-circle {
+            background-color: var(--noxha-magenta); border-color: var(--noxha-magenta);
+            color: white; transform: rotate(-45deg);
+        }
+
+        /* --- 6. PORTFOLIO --- */
+        .portfolio-subsection { margin-bottom: 100px; }
+        
+        .subsection-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 40px;
+            color: var(--rich-black);
+            border-left: 4px solid var(--noxha-magenta);
+            padding-left: 20px;
+        }
+
+        .masonry-grid { column-count: 3; column-gap: 30px; }
+        .masonry-item { display: inline-block; width: 100%; margin-bottom: 30px; overflow: hidden; background: #eee; }
+        .masonry-item img { width: 100%; display: block; transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
+        .masonry-item img:hover { transform: scale(1.05); }
+
+        .reels-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        .reel-item video { width: 100%; height: auto; border-radius: 4px; aspect-ratio: 9/16; object-fit: cover; }
+
+        .design-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        .design-item { background: var(--light-grey); overflow: hidden; }
+        .design-item img { width: 100%; height: auto; display: block; transition: transform 0.5s ease; }
+        .design-item:hover img { transform: scale(1.03); }
+        .design-caption { padding-top: 15px; font-family: 'Manrope'; font-size: 0.9rem; letter-spacing: 0.05em; color: var(--rich-black); font-weight: 600; }
+
+        .section-header { margin-bottom: 60px; border-bottom: 1px solid var(--rich-black); padding-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end;}
+        .section-header h2 { font-size: 3rem; }
+        .section-header span { font-family: 'Manrope'; font-weight: 700; letter-spacing: 0.1em; color: var(--noxha-magenta); }
+
+        .hide-item { display: none; }
+        .view-more-container { text-align: left; margin-top: 20px; }
+        .view-btn {
+            background: transparent; border: 1px solid var(--rich-black); color: var(--rich-black);
+            padding: 15px 40px; font-family: 'Manrope'; text-transform: uppercase; letter-spacing: 0.1em;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .view-btn:hover { background: var(--rich-black); color: white; }
+
+        /* --- 7. FOUNDERS (UPDATED ZIG-ZAG LAYOUT) --- */
+        .founders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 120px; /* More breathing room */
+        }
+
+        .founder-row {
+            display: flex;
+            gap: 80px; /* Space between text and image */
+            align-items: center; /* Vertically centered */
+        }
+
+        /* Zig-Zag Magic: Every EVEN row (2nd, 4th..) swaps direction */
+        .founder-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .founder-text {
+            flex: 1;
+        }
+
+        .founder-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--rich-black);
+            margin-bottom: 30px;
+        }
+
+        .founder-name {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            font-size: 2.5rem;
+            color: var(--rich-black);
+            margin: 0;
+        }
+
+        .founder-role {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--noxha-magenta);
+        }
+
+        .founder-bio {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .founder-image {
+            flex: 1;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .founder-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top; /* Keeps heads visible */
+            filter: grayscale(100%);
+            transition: filter 0.6s ease;
+        }
+        .founder-image:hover img { filter: grayscale(0%); }
+
+
+        /* --- 8. FOOTER --- */
+        footer { padding: 140px 5% 40px; text-align: center; background-color: white; border-top: 1px solid #f0f0f0; }
+        .footer-cta h2 { font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1.1; margin-bottom: 40px; font-weight: 400; }
+        .footer-cta .text-black { color: var(--rich-black); }
+        .footer-cta .text-magenta { color: var(--noxha-magenta); }
+        .footer-contact-links { margin-bottom: 120px; font-family: 'Manrope'; font-weight: 700; font-size: 1rem; letter-spacing: 0.05em; }
+        .contact-link { text-decoration: none; color: var(--rich-black); transition: color 0.3s; }
+        .contact-link:hover { color: var(--noxha-magenta); }
+        .contact-link .bracket { color: var(--noxha-magenta); font-weight: 700; margin: 0 5px; }
+        .separator { margin: 0 20px; color: #ccc; }
+        .footer-divider { height: 1px; background-color: #EAEAEA; width: 100%; margin-bottom: 30px; }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: flex-end; text-align: left; font-family: 'Manrope'; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--rich-black); text-transform: uppercase; font-weight: 700; }
+        .footer-location strong { display: block; font-weight: 800; margin-bottom: 5px; }
+        .footer-location span { color: #888; font-weight: 500; }
+        .footer-social a { text-decoration: none; color: var(--rich-black); border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+        .footer-social a:hover { border-bottom-color: var(--noxha-magenta); color: var(--noxha-magenta); }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 900px) {
+            /* Founders Mobile */
+            .founders-list { gap: 60px; }
+            .founder-row { flex-direction: column; gap: 30px; }
+            .founder-row:nth-child(even) { flex-direction: column; } /* No reverse on mobile, image always below text */
+            .founder-image { height: 450px; width: 100%; }
+            .founder-header { flex-direction: column; align-items: flex-start; gap: 5px; } /* Stack name/role */
+            
+            /* Other Mobile Fixes */
+            .design-grid { grid-template-columns: 1fr; }
+            .reels-grid { grid-template-columns: repeat(2, 1fr); }
+            .masonry-grid { column-count: 1; }
+            .nav-links { display: none; }
+            .hero-buttons { gap: 20px; flex-direction: column; }
+            .hero-separator { max-width: 100%; font-size: 0.7rem; }
+            .footer-bottom { flex-direction: column; align-items: center; gap: 30px; text-align: center; }
+            .separator { display: none; }
+            .footer-contact-links { display: flex; flex-direction: column; gap: 20px; }
+            .section-header h2 { font-size: 2.5rem; }
+            .footer-cta h2 { font-size: 3rem; }
+            .service-row { flex-direction: column; align-items: flex-start; gap: 20px; padding: 40px 0; }
+            .service-mid { padding: 0; }
+            .service-right { width: 100%; justify-content: flex-start; margin-top: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><img src="noxha-logo.png" alt="NOXHA"></div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#work">Portfolio</a>
+            <a href="#founders">Founders</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <video autoplay muted playsinline class="hero-video">
+            <source src="fins noxha.mp4" type="video/mp4">
+        </video>
+        <div class="hero-separator">
+            <span>DESIGN | PHOTO | FILM</span>
+        </div>
+        <p class="hero-description">
+            A concept-driven studio crafting brand's visual identities. Co-founded by a designer and a visual artist, NOXHA maps the gap between strategy and aesthetics, creating a distinct virtual identity through precision design and cinematic photography.
+        </p>
+        <div class="hero-buttons">
+            <a href="#contact" class="btn-inquire">
+                <span class="bracket">[</span> INQUIRE NOW <span class="bracket">]</span>
+            </a>
+            <a href="noxha-brochure.pdf" download class="btn-download">
+                DOWNLOAD BROCHURE <span style="font-size: 1.2rem; margin-left: 5px;">↓</span>
+            </a>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding">
+        <div class="services-header-new">
+            <h2 class="services-title-main">[ SERVICES ]</h2>
+            <span class="services-subtitle">WHAT WE DO</span>
+        </div>
+
+        <div class="services-list">
+            <div class="service-row">
+                <div class="service-left"><h3>Design</h3></div>
+                <div class="service-mid"><p>Brand Identity, Logo Systems, Packaging, UI/UX, and Catalogue design</p></div>
+                <div class="service-right"><div class="arrow-circle">→</div></div>
+            </div>
+            <div class="service-row">
+                <div class="service-left"><h3>Photography</h3></div>
+                <div class="service-mid"><p>Product, Portrait, and Lifestyle photography. Imagery that makes your brand feel premium.</p></div>
+                <div class="service-right"><div class="arrow-circle">→</div></div>
+            </div>
+            <div class="service-row">
+                <div class="service-left"><h3>Film</h3></div>
+                <div class="service-mid"><p>Brand story films, commercial shorts, and campaign direction. Motion that connects.</p></div>
+                <div class="service-right"><div class="arrow-circle">→</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="section-padding" style="background-color: #FAFAFA;">
+        <div class="section-header">
+            <h2>Selected Works</h2>
+            <span>02 — PORTFOLIO</span>
+        </div>
+
+        <div class="portfolio-subsection">
+            <h3 class="subsection-title">Photography (Raghav Kulkarni)</h3>
+            <div class="view-more-container" style="margin-bottom: 30px;">
+                <button class="view-btn" id="btn-photos" onclick="togglePhotos()">View Photography Portfolio</button>
+            </div>
+            <div class="masonry-grid" id="photo-grid">
+                <div class="masonry-item hide-item photo-item"><img src="photo1.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo2.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo3.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo4.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo5.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo6.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo7.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo8.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo9.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo10.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo11.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo12.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo13.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo14.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo15.jpg" alt="Work"></div>
+            </div>
+        </div>
+
+        <div class="portfolio-subsection">
+            <h3 class="subsection-title">Motion & Reels</h3>
+            <div class="view-more-container" style="margin-bottom: 30px;">
+                <button class="view-btn" id="btn-reels" onclick="toggleReels()">View Motion Portfolio</button>
+            </div>
+            <div class="reels-grid" id="reels-grid">
+                <div class="reel-item hide-item reel-item-class"><video controls playsinline><source src="reel1.mp4" type="video/mp4"></video></div>
+                <div class="reel-item hide-item reel-item-class"><video controls playsinline><source src="reel2.mp4" type="video/mp4"></video></div>
+                <div class="reel-item hide-item reel-item-class"><video controls playsinline><source src="reel3.mp4" type="video/mp4"></video></div>
+                <div class="reel-item hide-item reel-item-class"><video controls playsinline><source src="reel4.mp4" type="video/mp4"></video></div>
+                <div class="reel-item hide-item reel-item-class"><video controls playsinline><source src="reel5.mp4" type="video/mp4"></video></div>
+            </div>
+        </div>
+
+        <div class="portfolio-subsection">
+            <h3 class="subsection-title">Strategic Design (Bhakti Kulkarni)</h3>
+            <div class="view-more-container" style="margin-bottom: 30px;">
+                <button class="view-btn" id="btn-design" onclick="toggleDesign()">View Design Portfolio</button>
+            </div>
+            <div class="design-grid" id="design-grid">
+                <div class="design-item hide-item design-item-class"><img src="design1.jpg" alt="Design"><div class="design-caption">PROJECT ONE</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design2.jpg" alt="Design"><div class="design-caption">PROJECT TWO</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design3.jpg" alt="Design"><div class="design-caption">PROJECT THREE</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design4.jpg" alt="Design"><div class="design-caption">PROJECT FOUR</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design5.jpg" alt="Design"><div class="design-caption">PROJECT FIVE</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design6.jpg" alt="Design"><div class="design-caption">PROJECT SIX</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design7.jpg" alt="Design"><div class="design-caption">PROJECT SEVEN</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design8.jpg" alt="Design"><div class="design-caption">PROJECT EIGHT</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design9.jpg" alt="Design"><div class="design-caption">PROJECT NINE</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design10.jpg" alt="Design"><div class="design-caption">PROJECT TEN</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="founders" class="section-padding">
+        <div class="services-header-new" style="margin-bottom: 80px;">
+            <h2 class="services-title-main">[ THE TEAM ]</h2>
+            <span class="services-subtitle">FOUNDERS</span>
+        </div>
+
+        <div class="founders-list">
+            
+            <div class="founder-row">
+                <div class="founder-text">
+                    <div class="founder-header">
+                        <h3 class="founder-name">Bhakti Kulkarni</h3>
+                        <span class="founder-role">DESIGNER</span>
+                    </div>
+                    <p class="founder-bio">
+                        With a foundation from NID Ahmedabad, Bhakti leads the design philosophy at NOXHA. She specializes in translating complex brand values into clear, systematic visual identities. Her work spans brand systems, packaging, and editorial design, always prioritizing cultural sensitivity and intricate craftsmanship.
+                    </p>
+                </div>
+                <div class="founder-image">
+                    <img src="bhakti.jpg" alt="Bhakti Kulkarni">
+                </div>
+            </div>
+
+            <div class="founder-row">
+                <div class="founder-text">
+                    <div class="founder-header">
+                        <h3 class="founder-name">Raghav Kulkarni</h3>
+                        <span class="founder-role">VISUAL ARTIST</span>
+                    </div>
+                    <p class="founder-bio">
+                        A graduate of MIT Pune, Raghav bridges the gap between technical photography and creative direction. As a Visual Artist, he focuses on atmospheric storytelling and controlled lighting to create cinematic imagery. He ensures that every frame—whether still or moving—serves the larger brand narrative.
+                    </p>
+                </div>
+                <div class="founder-image">
+                    <img src="raghav.jpg" alt="Raghav Kulkarni">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-cta">
+            <h2>
+                <span class="text-black">YOUR ROADMAP TO</span><br>
+                <span class="text-magenta">VISUAL IDENTITY.</span>
+            </h2>
+            
+            <div class="footer-contact-links">
+                <a href="mailto:studionoxha@gmail.com" class="contact-link">
+                    <span class="bracket">[</span> studionoxha@gmail.com <span class="bracket">]</span>
+                </a>
+                <span class="separator">|</span>
+                <a href="tel:+919421586636" class="contact-link">
+                    <span class="bracket">[</span> +91 9421586636 <span class="bracket">]</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+            <div class="footer-location">
+                <strong>PUNE, INDIA</strong>
+                <span>AVAILABLE WORLDWIDE</span>
+            </div>
+            
+            <div class="footer-social">
+                <a href="https://www.instagram.com/studionoxha/" target="_blank">INSTAGRAM</a>
+            </div>
+            
+            <div class="footer-copyright">
+                © 2026 NOXHA STUDIO.
+            </div>
+        </div>
+    </footer>
 
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        noxha: '#A92654',
-                        black: '#050505',
-                        white: '#ffffff',
-                        paper: '#f9f9f9',
-                        gray: '#f4f4f4',
-                        border: '#e5e5e5',
-                        subtext: '#666666'
-                    },
-                    fontFamily: {
-                        display: ['"Playfair Display"', 'serif'], 
-                        sans: ['"DM Sans"', 'sans-serif'],
-                    },
-                    letterSpacing: {
-                        widest: '.25em',
-                    },
-                    animation: {
-                        'slide-up': 'slideUp 1s ease-out forwards',
-                        'flicker': 'flicker 0.5s linear forwards',
-                        'float': 'float 6s ease-in-out infinite',
-                        'float-delayed': 'float 7s ease-in-out infinite 2s',
-                        'float-reverse': 'float-reverse 8s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        slideUp: {
-                            '0%': { transform: 'translateY(40px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                        flicker: {
-                            '0%': { opacity: '0' },
-                            '10%': { opacity: '0' },
-                            '11%': { opacity: '1' },
-                            '12%': { opacity: '0.2' },
-                            '20%': { opacity: '1' },
-                            '25%': { opacity: '0.5' },
-                            '60%': { opacity: '1' },
-                            '70%': { opacity: '0.8' },
-                            '100%': { opacity: '1' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        'float-reverse': {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(15px)' },
-                        }
-                    }
-                }
+        function togglePhotos() {
+            var items = document.querySelectorAll('.photo-item');
+            var btn = document.getElementById('btn-photos');
+            var isHidden = items[0].classList.contains('hide-item');
+
+            if (isHidden) {
+                items.forEach(i => i.classList.remove('hide-item'));
+                btn.innerHTML = "Close Photography";
+            } else {
+                items.forEach(i => i.classList.add('hide-item'));
+                btn.innerHTML = "View Photography Portfolio";
+            }
+        }
+
+        function toggleReels() {
+            var items = document.querySelectorAll('.reel-item-class');
+            var btn = document.getElementById('btn-reels');
+            var isHidden = items[0].classList.contains('hide-item');
+
+            if (isHidden) {
+                items.forEach(i => i.classList.remove('hide-item'));
+                btn.innerHTML = "Close Motion";
+            } else {
+                items.forEach(i => i.classList.add('hide-item'));
+                btn.innerHTML = "View Motion Portfolio";
+            }
+        }
+
+        function toggleDesign() {
+            var items = document.querySelectorAll('.design-item-class');
+            var btn = document.getElementById('btn-design');
+            var isHidden = items[0].classList.contains('hide-item');
+
+            if (isHidden) {
+                items.forEach(i => i.classList.remove('hide-item'));
+                btn.innerHTML = "Close Design";
+            } else {
+                items.forEach(i => i.classList.add('hide-item'));
+                btn.innerHTML = "View Design Portfolio";
             }
         }
     </script>
-    <style>
-        /* Base Styles - Start with Brand Color Background to avoid black flash */
-        body { background-color: #A92654; color: #050505; overflow-x: hidden; }
-
-        /* Intro Overlay - Brand Color Background */
-        #intro-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-color: #A92654; z-index: 2147483647;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            cursor: pointer; transition: opacity 0.8s ease-out;
-        }
-        
-        .studio-light {
-            position: absolute; width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 60%);
-            border-radius: 50%; opacity: 0; pointer-events: none; mix-blend-mode: screen; z-index: 10;
-        }
-        #light-left { top: 0%; left: 0%; transform: translate(-20%, -20%); }
-        #light-right { top: 0%; right: 0%; transform: translate(20%, -20%); }
-
-        /* Custom Cursor - Paint Brush Style */
-        #cursor {
-            position: fixed; top: 0; left: 0; 
-            width: 20px; height: 20px;
-            background-color: #ffffff; /* White cursor initially for contrast against magenta */
-            border-radius: 50% 50% 50% 5%; 
-            transform: translate(-50%, -50%) rotate(-45deg); 
-            pointer-events: none; z-index: 9999;
-            transition: width 0.3s, height 0.3s, background-color 0.3s, transform 0.3s;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-        }
-        #cursor.hovered { 
-            width: 30px; height: 30px; 
-            background-color: rgba(169, 38, 84, 0.8);
-            border: 2px solid #A92654;
-            transform: translate(-50%, -50%) rotate(-45deg) scale(1.2);
-        }
-        @media (max-width: 768px) { #cursor { display: none; } body { cursor: auto; } }
-
-        /* Typography */
-        .text-outline { 
-            -webkit-text-stroke: 1px #050505; color: transparent; transition: all 0.5s ease; font-style: italic;
-        }
-        .text-outline:hover { -webkit-text-stroke: 0px; color: #A92654; }
-
-        /* Animations */
-        .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .fade-up.active { opacity: 1; transform: translateY(0); }
-
-        .hero-text-holder { overflow: hidden; display: block; line-height: 1.1; }
-        .hero-text { animation: slideUp 1s ease-out forwards; opacity: 0; } 
-        
-        /* Video Container for Layering */
-        .video-background {
-            position: absolute; 
-            top: 35%; 
-            left: 50%; 
-            transform: translate(-50%, -50%);
-            width: 100%; /* Full width */
-            height: 80%; 
-            z-index: 0; /* Behind Text */
-            opacity: 0.9; 
-            pointer-events: none;
-            overflow: visible; 
-        }
-        
-        /* Delays */
-        .delay-100 { animation-delay: 0.1s; transition-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; transition-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; transition-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; transition-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; transition-delay: 0.5s; }
-
-        /* Buttons */
-        .btn-bracket::before { content: '['; margin-right: 8px; color: #A92654; transition: all 0.3s; }
-        .btn-bracket::after { content: ']'; margin-left: 8px; color: #A92654; transition: all 0.3s; }
-        .btn-bracket:hover::before { margin-right: 15px; } .btn-bracket:hover::after { margin-left: 15px; }
-
-        .btn-outline { border: 1px solid #111111; transition: all 0.3s ease; }
-        .btn-outline:hover { background-color: #111111; color: #ffffff; }
-
-        .img-zoom-container { overflow: hidden; }
-        .img-zoom { transition: transform 0.8s ease; }
-        .group:hover .img-zoom { transform: scale(1.05); }
-    </style>
-</head>
-<body class="selection:bg-noxha selection:text-white font-sans">
-
-    <!-- INTRO OVERLAY -->
-    <div id="intro-overlay" onclick="startExperience()">
-        <div id="intro-logo" class="mb-8 transition-transform duration-700">
-            <!-- White Logo for Magenta Background -->
-            <img src="./noxha-logo-removebg-preview.png" alt="NOXHA" class="w-24 h-24 object-contain brightness-0 invert">
-        </div>
-        <div class="text-white text-center pointer-events-none transition-opacity duration-300" id="tap-text">
-            <p class="text-xs uppercase tracking-[0.5em] animate-pulse opacity-90">Unveil the Vision</p>
-        </div>
-    </div>
-
-    <!-- LIGHTS -->
-    <div id="lights-container" class="fixed inset-0 pointer-events-none z-[9999]">
-        <div id="light-left" class="studio-light"></div>
-        <div id="light-right" class="studio-light"></div>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main-content" class="opacity-0 transition-opacity duration-500 bg-white">
-        <div id="cursor"></div>
-
-        <!-- Navigation -->
-        <nav class="fixed w-full z-50 px-6 py-6 flex justify-between items-center bg-white/90 backdrop-blur-md border-b border-border transition-all duration-300">
-            <a href="#" class="block hover:scale-105 transition-transform duration-300 cursor-hover flex items-center gap-3">
-                <img src="./noxha-logo-removebg-preview.png" alt="NOXHA" class="w-10 h-10 md:w-12 md:h-12 object-contain" onerror="this.style.display='none'; document.getElementById('logo-text').style.display='block';">
-                <span id="logo-text" class="hidden text-2xl font-display font-bold tracking-tighter text-black">NOXHA</span>
-            </a>
-            
-            <div class="hidden md:flex gap-12 text-xs font-bold tracking-widest uppercase text-black font-sans">
-                <a href="#about" class="hover:text-noxha transition-colors cursor-hover nav-link">> About</a>
-                <a href="#services" class="hover:text-noxha transition-colors cursor-hover nav-link">> Services</a>
-                <a href="#process" class="hover:text-noxha transition-colors cursor-hover nav-link">> Process</a>
-                <a href="#contact" class="hover:text-noxha transition-colors cursor-hover text-noxha nav-link">> Start Project</a>
-            </div>
-
-            <button class="md:hidden text-sm font-bold uppercase tracking-widest border border-black/20 px-4 py-2 rounded-full hover:bg-black hover:text-white transition-colors cursor-hover" onclick="document.getElementById('mobile-menu').classList.remove('translate-x-full')">Menu</button>
-        </nav>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] flex flex-col justify-center items-center gap-8 text-3xl font-display font-medium uppercase translate-x-full transition-transform duration-500 ease-in-out md:hidden">
-            <button onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')" class="absolute top-6 right-6 text-sm font-sans text-subtext border border-black/10 px-4 py-2 rounded-full">Close [x]</button>
-            <a href="#about" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')" class="text-black">About</a>
-            <a href="#services" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')" class="text-black">Services</a>
-            <a href="#process" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')" class="text-black">Process</a>
-            <a href="#contact" onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')" class="text-noxha">Start Project</a>
-            <div class="absolute bottom-10 text-xs text-subtext font-sans tracking-widest">Pune, India</div>
-        </div>
-
-        <!-- HERO SECTION -->
-        <header class="min-h-screen flex flex-col justify-center px-6 md:px-12 pt-32 pb-16 bg-white text-center overflow-hidden relative">
-            
-            <!-- VIDEO ANIMATION (Behind Text) -->
-            <div class="video-background">
-                <video autoplay muted playsinline loop class="w-full h-full object-contain transform origin-center">
-                    <source src="./fins%20noxha.mp4" type="video/mp4">
-                </video>
-            </div>
-
-            <!-- Content Layer (In Front of Video) -->
-            <div class="max-w-7xl w-full mx-auto z-10 flex flex-col items-center relative">
-                
-                <!-- Spacer for layout balance -->
-                <div class="h-10 md:h-20"></div>
-
-                <!-- MAIN HEADLINE -->
-                <h1 class="text-3xl md:text-6xl lg:text-[10rem] font-display font-medium leading-[0.9] md:leading-[0.85] tracking-tighter mb-4 md:mb-6 text-black z-10 relative mix-blend-multiply">
-                    <div class="hero-text-holder"><span class="block hero-text delay-300 text-outline cursor-default">STUDIO</span></div>
-                    <div class="hero-text-holder"><span class="block hero-text delay-400">NOXHA</span></div>
-                </h1>
-
-                <!-- Subtitle (Moved Below Headline) -->
-                <div class="flex items-center gap-4 mb-8 z-10 relative force-visible">
-                    <span class="h-[1px] w-8 md:w-16 bg-noxha"></span>
-                    <span class="text-[10px] md:text-xs font-bold tracking-widest uppercase text-subtext font-sans">Design | Photo | Film</span>
-                    <span class="h-[1px] w-8 md:w-16 bg-noxha"></span>
-                </div>
-
-                <!-- Paragraph & CTA -->
-                <div class="flex flex-col items-center gap-6 mt-4 z-10 relative force-visible">
-                    <!-- Creative Intro Text -->
-                    <p class="max-w-xl text-subtext text-base md:text-lg leading-relaxed bg-white/60 backdrop-blur-sm p-4 rounded-lg font-sans">
-                        A concept-driven studio crafting brand's visual identities. Co-founded by a designer and a visual artist, NOXHA maps the gap between strategy and aesthetics, creating a distinct virtual identity through precision design and cinematic photography.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-center font-sans mt-4">
-                        <a href="#contact" class="btn-bracket text-black text-xs md:text-sm font-bold tracking-widest uppercase hover:text-noxha transition-colors">
-                            Inquire Now
-                        </a>
-                        <a href="./noxha%20yay.pdf" download class="btn-outline text-black text-xs md:text-sm font-bold tracking-widest uppercase px-6 py-3 rounded-full flex items-center gap-2 hover:border-black transition-colors bg-white/80">
-                            <span>Download Brochure</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- SERVICES -->
-        <section id="services" class="py-20 md:py-32 px-6 md:px-12 bg-white relative z-10">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex justify-between items-end mb-12 md:mb-20 pb-4 border-b border-black/10 fade-up">
-                    <h2 class="text-3xl md:text-6xl font-display font-bold text-black">[ SERVICES ]</h2>
-                    <span class="text-[10px] md:text-xs font-bold tracking-widest text-noxha uppercase hidden md:block font-sans">What We Do</span>
-                </div>
-                <div class="flex flex-col font-sans">
-                    
-                    <!-- Design Service -->
-                    <div class="group border-b border-black/10 py-8 md:py-12 hover:bg-gray transition-all duration-500 fade-up delay-100">
-                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start">
-                            <span class="hidden md:block col-span-1 text-sm font-mono text-noxha opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-x-[-10px] group-hover:translate-x-0">01</span>
-                            <h3 class="col-span-1 md:col-span-4 text-2xl md:text-3xl font-display font-bold text-black group-hover:text-noxha transition-colors">Design</h3>
-                            <p class="col-span-1 md:col-span-5 text-subtext text-sm md:text-base leading-relaxed group-hover:text-black transition-colors">Brand Identity, Logo Systems, Packaging, UI/UX, and Catalogue design</p>
-                            
-                            <!-- Design Arrow Link -->
-                            <a href="#design-portfolio" class="col-span-1 md:col-span-2 flex justify-end group/arrow">
-                                <div class="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center transition-all duration-300 group-hover/arrow:bg-black group-hover/arrow:text-white group-hover/arrow:scale-110">
-                                    <span class="text-xl group-hover/arrow:-rotate-45 transition-transform duration-300">→</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Photography Service -->
-                    <div class="group border-b border-black/10 py-8 md:py-12 hover:bg-gray transition-all duration-500 fade-up delay-200">
-                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start">
-                            <span class="hidden md:block col-span-1 text-sm font-mono text-noxha opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-x-[-10px] group-hover:translate-x-0">02</span>
-                            <h3 class="col-span-1 md:col-span-4 text-2xl md:text-3xl font-display font-bold text-black group-hover:text-noxha transition-colors">Photography</h3>
-                            <p class="col-span-1 md:col-span-5 text-subtext text-sm md:text-base leading-relaxed group-hover:text-black transition-colors">Product, Portrait, and Lifestyle photography. Imagery that makes your brand feel premium.</p>
-                            
-                            <!-- Photography Arrow Link -->
-                            <a href="#photo-portfolio" class="col-span-1 md:col-span-2 flex justify-end group/arrow">
-                                <div class="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center transition-all duration-300 group-hover/arrow:bg-black group-hover/arrow:text-white group-hover/arrow:scale-110">
-                                    <span class="text-xl group-hover/arrow:-rotate-45 transition-transform duration-300">→</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Film Service -->
-                    <div class="group border-b border-black/10 py-8 md:py-12 hover:bg-gray transition-all duration-500 fade-up delay-300">
-                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start">
-                            <span class="hidden md:block col-span-1 text-sm font-mono text-noxha opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-x-[-10px] group-hover:translate-x-0">03</span>
-                            <h3 class="col-span-1 md:col-span-4 text-2xl md:text-3xl font-display font-bold text-black group-hover:text-noxha transition-colors">Film</h3>
-                            <p class="col-span-1 md:col-span-5 text-subtext text-sm md:text-base leading-relaxed group-hover:text-black transition-colors">Brand story films, commercial shorts, and campaign direction. Motion that connects.</p>
-                            
-                            <!-- Film Arrow Link -->
-                            <a href="#film-portfolio" class="col-span-1 md:col-span-2 flex justify-end group/arrow">
-                                <div class="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center transition-all duration-300 group-hover/arrow:bg-black group-hover/arrow:text-white group-hover/arrow:scale-110">
-                                    <span class="text-xl group-hover/arrow:-rotate-45 transition-transform duration-300">→</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Process -->
-        <section id="process" class="py-20 px-6 md:px-12 bg-gray relative z-10">
-            <div class="max-w-7xl mx-auto">
-                <div class="mb-12 md:mb-20 fade-up">
-                    <span class="text-[10px] md:text-xs font-bold tracking-widest text-noxha uppercase block mb-4 font-sans">[ The Approach ]</span>
-                    <h2 class="text-3xl md:text-5xl font-display font-bold max-w-3xl leading-tight text-black">Every decision is backed by narrative and brand logic.</h2>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-px bg-transparent md:bg-black/5 border-0 md:border border-black/5 font-sans">
-                    <div class="bg-white p-6 md:p-8 hover:bg-paper transition-colors duration-300 group fade-up delay-100"><span class="text-noxha text-sm font-mono mb-6 block">[ 01 ]</span><h3 class="text-xl font-bold mb-4 text-black">Understand</h3><p class="text-subtext text-sm">Deep dive into brand goals, voice, and emotional tone.</p></div>
-                    <div class="bg-white p-6 md:p-8 hover:bg-paper transition-colors duration-300 group fade-up delay-200"><span class="text-noxha text-sm font-mono mb-6 block">[ 02 ]</span><h3 class="text-xl font-bold mb-4 text-black">Direction</h3><p class="text-subtext text-sm">Moodboards, style language, color & typography.</p></div>
-                    <div class="bg-white p-6 md:p-8 hover:bg-paper transition-colors duration-300 group fade-up delay-300"><span class="text-noxha text-sm font-mono mb-6 block">[ 03 ]</span><h3 class="text-xl font-bold mb-4 text-black">Create</h3><p class="text-subtext text-sm">Rigorous execution of design, photography, and film.</p></div>
-                    <div class="bg-white p-6 md:p-8 hover:bg-paper transition-colors duration-300 group fade-up delay-400"><span class="text-noxha text-sm font-mono mb-6 block">[ 04 ]</span><h3 class="text-xl font-bold mb-4 text-black">Refine</h3><p class="text-subtext text-sm">Final assets, brand kit, rollout guidelines.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Founders -->
-        <section id="about" class="py-20 md:py-32 px-6 md:px-12 bg-white relative z-10">
-            <div class="max-w-7xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-32">
-                    <div class="relative group fade-up flex flex-col items-center text-center md:block md:text-left">
-                        <div class="img-zoom-container w-32 h-32 md:w-full md:h-[500px] bg-gray mb-8 relative rounded-full md:rounded-lg overflow-hidden flex items-center justify-center shadow-lg md:shadow-none">
-                            <img src="./bhakti-image.jpg" alt="Bhakti Kulkarni" class="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700">
-                        </div>
-                        <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline border-b-0 md:border-b border-black/10 pb-4 mb-4 w-full">
-                            <h3 class="text-2xl md:text-2xl font-bold text-black group-hover:text-noxha transition-colors">Bhakti Kulkarni</h3>
-                            <span class="text-[10px] md:text-xs font-bold tracking-widest text-noxha uppercase font-sans mt-2 md:mt-0">Designer</span>
-                        </div>
-                        <p class="text-subtext text-sm leading-relaxed font-sans max-w-sm md:max-w-none">
-                            With a foundation from NID Ahmedabad, Bhakti leads the design philosophy at NOXHA. She specializes in translating complex brand values into clear, systematic visual identities. Her work spans brand systems, packaging, and editorial design, always prioritizing cultural sensitivity and intricate craftsmanship.
-                        </p>
-                    </div>
-                    <div class="relative group md:mt-32 fade-up delay-200 flex flex-col items-center text-center md:block md:text-left">
-                        <div class="img-zoom-container w-32 h-32 md:w-full md:h-[500px] bg-gray mb-8 relative rounded-full md:rounded-lg overflow-hidden flex items-center justify-center shadow-lg md:shadow-none">
-                            <img src="./raghav-photo.jpg" alt="Raghav Kulkarni" class="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700">
-                        </div>
-                        <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline border-b-0 md:border-b border-black/10 pb-4 mb-4 w-full">
-                            <h3 class="text-2xl md:text-2xl font-bold text-black group-hover:text-noxha transition-colors">Raghav Kulkarni</h3>
-                            <span class="text-[10px] md:text-xs font-bold tracking-widest text-noxha uppercase font-sans mt-2 md:mt-0">Visual Artist</span>
-                        </div>
-                        <p class="text-subtext text-sm leading-relaxed font-sans max-w-sm md:max-w-none">
-                            A graduate of MIT Pune, Raghav bridges the gap between technical photography and creative direction. As a Visual Artist, he focuses on atmospheric storytelling and controlled lighting to create cinematic imagery. He ensures that every frame—whether still or moving—serves the larger brand narrative.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <section id="contact" class="py-20 md:py-32 px-6 md:px-12 border-t border-black/10 bg-white relative z-10">
-            <div class="max-w-7xl mx-auto text-center">
-                <h2 class="text-4xl md:text-8xl font-display font-medium mb-12 uppercase leading-[0.9] fade-up text-black">Your Roadmap to <br> <span class="text-noxha">Visual Identity.</span></h2>
-                <div class="flex flex-col md:flex-row justify-center gap-6 md:gap-8 mb-20 fade-up delay-100 font-sans">
-                    <a href="mailto:studionoxha@gmail.com" class="btn-bracket text-black text-base md:text-lg font-bold hover:text-noxha transition-colors">studionoxha@gmail.com</a>
-                    <span class="hidden md:inline text-black/30">|</span>
-                    <a href="tel:9421586636" class="btn-bracket text-black text-base md:text-lg font-bold hover:text-noxha transition-colors">+91 9421586636</a>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-[10px] md:text-xs font-bold tracking-widest text-subtext uppercase border-t border-black/10 pt-12 fade-up delay-200 font-sans">
-                    <div class="text-center md:text-left"><p class="mb-2 text-black">Pune, India</p><p>Available Worldwide</p></div>
-                    <div class="text-center"><a href="https://www.instagram.com/studionoxha/" class="hover:text-noxha transition-colors mx-2">Instagram</a></div>
-                    <div class="text-center md:text-right"><p>&copy; 2025 NOXHA Studio.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <script>
-            // INTRO INTERACTION SCRIPT
-            function startExperience() {
-                const overlay = document.getElementById('intro-overlay');
-                const logo = document.getElementById('intro-logo');
-                const mainContent = document.getElementById('main-content');
-                const lights = document.querySelectorAll('.studio-light');
-                const cursor = document.getElementById('cursor');
-                const tapText = document.getElementById('tap-text');
-
-                // Hide text
-                tapText.style.opacity = '0';
-
-                // 1. Animate Logo Scale Up (Zoom effect)
-                logo.style.transform = 'scale(20)';
-                logo.style.opacity = '0';
-
-                // 2. Flicker Lights On (Visible IMMEDIATELY)
-                lights.forEach(light => {
-                    light.style.animation = 'flicker 0.5s linear forwards';
-                });
-
-                // 3. REVEAL CONTENT AT SAME TIME AS LIGHTS
-                mainContent.style.opacity = '1';
-                
-                // 4. Fade out overlay
-                overlay.style.backgroundColor = 'transparent'; 
-                
-                // 5. Update Colors - Switch cursor back to brand color for white background
-                document.body.style.backgroundColor = '#ffffff'; 
-                cursor.style.backgroundColor = '#A92654'; 
-                
-                // 6. Cleanup
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                    document.getElementById('lights-container').style.display = 'none';
-                }, 800);
-            }
-
-            document.addEventListener('DOMContentLoaded', () => {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('active');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1 });
-                document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-            });
-
-            // Custom Cursor Logic
-            const cursor = document.getElementById('cursor');
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            });
-            document.querySelectorAll('.cursor-hover, a, button').forEach(el => {
-                el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-            });
-        </script>
 </body>
 </html>
-
-
