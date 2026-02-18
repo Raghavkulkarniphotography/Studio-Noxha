@@ -2,437 +2,607 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Raghav Kulkarni | Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio NOXHA | Visual Roadmap</title>
     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        /* --- 1. CORE STYLES --- */
         :root {
-            --brand-blue: #00638C;
-            --text-main: #222;
-            --bg-color: #fafafa;
-            --radius-main: 16px;
-            --radius-pill: 50px;
+            --bg-white: #FFFFFF;
+            --noxha-magenta: #AE3854;
+            --rich-black: #221F20;
+            --light-grey: #F9F9F9;
+            --border-color: #EAEAEA;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
+        * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
         body {
+            background-color: var(--bg-white);
+            color: var(--rich-black);
             font-family: 'Manrope', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            margin: 0;
+            padding: 0;
             overflow-x: hidden;
-            overscroll-behavior-y: none; 
         }
 
-        /* --- 1. HERO LANDING (New) --- */
-        .hero {
+        /* --- GLOBAL TEXT HOVER EFFECTS --- */
+        h1, h2, h3, h4, p, span, li {
+            transition: color 0.3s ease, opacity 0.3s ease;
+            cursor: default;
+        }
+        
+        h1:hover, h2:hover, h3:hover { color: var(--noxha-magenta); }
+        p:hover, li:hover { color: black; }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            color: var(--rich-black);
+            margin: 0;
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            line-height: 1.8;
+            color: #555;
+            font-size: 1.05rem;
+            font-weight: 300;
+        }
+
+        /* --- 2. NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 5%;
+            position: fixed;
             width: 100%;
-            height: 100vh; /* Full screen height */
+            top: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .logo img { height: 40px; display: block; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--rich-black);
+            margin-left: 45px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--noxha-magenta); }
+
+        /* --- 3. HERO --- */
+        .hero {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: #fff;
-            position: relative;
-            z-index: 10;
+            text-align: center;
+            padding: 120px 20px 60px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .hero-logo {
-            width: 250px; /* Big logo size */
+        .hero-video {
+            width: 300px;
             height: auto;
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: fadeIn 1.5s ease forwards;
+            mix-blend-mode: multiply;
+            margin-bottom: 40px;
         }
 
-        .scroll-hint {
-            position: absolute; bottom: 40px;
-            font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
-            color: #aaa; animation: bounce 2s infinite; opacity: 0;
-            animation-delay: 1s; animation-fill-mode: forwards;
-        }
-
-        @keyframes fadeIn { to { opacity: 1; } }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-            to { opacity: 1; }
-        }
-
-        /* --- 2. HEADER (Sticky) --- */
-        nav {
-            position: sticky; top: 0; left: 0; width: 100%;
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            padding: 15px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05);
-            gap: 20px; 
-        }
-
-        .logo { flex-shrink: 0; }
-        /* Smaller logo in navbar */
-        .logo img { height: 40px; width: auto; cursor: pointer; display: block; }
-
-        .menu-container {
-            display: flex; gap: 8px;
-            background: #f0f2f5; padding: 5px; border-radius: var(--radius-pill);
-            white-space: nowrap; 
-        }
-
-        .cat-btn {
-            border: none; background: transparent; padding: 10px 25px;
-            font-family: 'Manrope', sans-serif; font-size: 0.9rem; font-weight: 600; color: #777;
-            cursor: pointer; transition: all 0.3s ease; border-radius: var(--radius-pill);
-        }
-        .cat-btn:hover { color: var(--text-main); background: rgba(255,255,255,0.5); }
-        .cat-btn.active { color: #fff; background: var(--brand-blue); box-shadow: 0 4px 12px rgba(0, 99, 140, 0.3); }
-
-        .about-btn {
-            font-size: 0.9rem; font-weight: 700; color: var(--brand-blue);
-            cursor: pointer; margin-left: 20px; text-transform: uppercase; letter-spacing: 1px;
-            flex-shrink: 0; 
-        }
-
-        /* --- 3. THE DYNAMIC GRID --- */
-        .gallery-container { padding: 30px 5% 80px; min-height: 100vh; }
-
-        .masonry-wrapper {
+        .hero-separator {
             display: flex;
-            gap: 30px; 
-            align-items: flex-start;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
+            color: #666;
+            font-family: 'Manrope';
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
         }
-
-        .masonry-wrapper.wide-gap { gap: 60px; }
         
-        .masonry-col {
-            flex: 1; display: flex; flex-direction: column; gap: 30px; 
+        .hero-separator::before, .hero-separator::after {
+            content: ""; flex: 1; height: 2px; background-color: var(--noxha-magenta);
         }
-        .masonry-wrapper.wide-gap .masonry-col { gap: 60px; }
+        .hero-separator span { padding: 0 20px; }
 
-        .item {
-            position: relative;
-            border-radius: var(--radius-main);
+        .hero-description {
+            font-size: 1.1rem; line-height: 1.8; color: #555; max-width: 750px; margin-bottom: 50px;
+        }
+
+        .hero-buttons {
+            display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap;
+        }
+
+        .btn-inquire {
+            text-decoration: none; color: var(--rich-black); font-weight: 800; font-size: 0.9rem;
+            letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.3s;
+        }
+        .btn-inquire .bracket { color: var(--noxha-magenta); font-size: 1.2rem; font-weight: 700; margin: 0 5px; }
+        .btn-inquire:hover { color: var(--noxha-magenta); }
+
+        .btn-download {
+            text-decoration: none; color: var(--rich-black); border: 1px solid var(--rich-black);
+            padding: 18px 35px; border-radius: 50px; font-weight: 700; font-size: 0.85rem;
+            letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s;
+            display: inline-flex; align-items: center; gap: 10px;
+        }
+        .btn-download:hover { background-color: var(--rich-black); color: white; border-color: var(--rich-black); }
+
+        /* --- 4. SECTIONS COMMON --- */
+        .section-padding { padding: 120px 5%; }
+
+        /* --- 5. SERVICES (LIST STYLE) --- */
+        .services-header-new {
+            display: flex; justify-content: space-between; align-items: baseline;
+            margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #EAEAEA;
+        }
+        .services-title-main { font-size: 4rem; font-weight: 400; color: var(--rich-black); font-family: 'Cormorant Garamond', serif; }
+        .services-subtitle {
+            font-family: 'Manrope'; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.2em;
+            color: var(--noxha-magenta); text-transform: uppercase;
+        }
+        
+        .services-list { display: flex; flex-direction: column; }
+        
+        .service-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 50px 0; border-bottom: 1px solid #EAEAEA; transition: all 0.3s ease;
+        }
+        
+        .service-left { flex: 1; }
+        .service-left h3 {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 0;
+            color: var(--noxha-magenta);
+        }
+
+        .service-mid { flex: 2; padding: 0 40px; }
+        .service-mid p { 
+            margin: 0; 
+            font-size: 1.1rem; 
+            color: var(--rich-black); 
+            font-family: 'Cormorant Garamond', serif; 
+            font-style: italic; 
+            font-weight: 700;
+        }
+        
+        .service-right { flex: 0 0 50px; display: flex; justify-content: flex-end; }
+        .arrow-circle {
+            width: 50px; height: 50px; border: 1px solid #ccc; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; color: #999; transition: all 0.3s ease;
+        }
+        
+        .service-row:hover .service-left h3 { opacity: 0.8; }
+        .service-row:hover .arrow-circle {
+            background-color: var(--noxha-magenta); border-color: var(--noxha-magenta);
+            color: white; transform: rotate(-45deg);
+        }
+
+        /* --- 6. PORTFOLIO --- */
+        .portfolio-subsection { margin-bottom: 100px; }
+        
+        .subsection-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 40px;
+            color: var(--rich-black);
+            border-left: 4px solid var(--noxha-magenta);
+            padding-left: 20px;
+        }
+
+        .masonry-grid { column-count: 3; column-gap: 30px; }
+        .masonry-item { display: inline-block; width: 100%; margin-bottom: 30px; overflow: hidden; background: #eee; }
+        .masonry-item img { width: 100%; display: block; transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
+        .masonry-item img:hover { transform: scale(1.05); }
+
+        .reels-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        .reel-item video { width: 100%; height: auto; border-radius: 4px; aspect-ratio: 9/16; object-fit: cover; }
+
+        .design-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        .design-item { background: var(--light-grey); overflow: hidden; }
+        .design-item img { width: 100%; height: auto; display: block; transition: transform 0.5s ease; }
+        .design-item:hover img { transform: scale(1.03); }
+        .design-caption { padding-top: 15px; font-family: 'Manrope'; font-size: 0.9rem; letter-spacing: 0.05em; color: var(--rich-black); font-weight: 600; }
+
+        .section-header { margin-bottom: 60px; border-bottom: 1px solid var(--rich-black); padding-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end;}
+        .section-header h2 { font-size: 3rem; }
+        .section-header span { font-family: 'Manrope'; font-weight: 700; letter-spacing: 0.1em; color: var(--noxha-magenta); }
+
+        .hide-item { display: none; }
+        .view-more-container { text-align: left; margin-top: 20px; }
+        .view-btn {
+            background: transparent; border: 1px solid var(--rich-black); color: var(--rich-black);
+            padding: 15px 40px; font-family: 'Manrope'; text-transform: uppercase; letter-spacing: 0.1em;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .view-btn:hover { background: var(--rich-black); color: white; }
+
+        /* --- 7. FOUNDERS (UPDATED ZIG-ZAG LAYOUT) --- */
+        .founders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 120px; /* More breathing room */
+        }
+
+        .founder-row {
+            display: flex;
+            gap: 80px; /* Space between text and image */
+            align-items: center; /* Vertically centered */
+        }
+
+        /* Zig-Zag Magic: Every EVEN row (2nd, 4th..) swaps direction */
+        .founder-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .founder-text {
+            flex: 1;
+        }
+
+        .founder-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--rich-black);
+            margin-bottom: 30px;
+        }
+
+        .founder-name {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            font-size: 2.5rem;
+            color: var(--rich-black);
+            margin: 0;
+        }
+
+        .founder-role {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--noxha-magenta);
+        }
+
+        .founder-bio {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .founder-image {
+            flex: 1;
+            height: 600px;
             overflow: hidden;
-            background: #fff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            transition: transform 0.3s ease;
-            transform: translateZ(0); will-change: transform; 
-            cursor: pointer;
         }
 
-        .item:hover { transform: translateY(-5px); }
-
-        .item img {
-            width: 100%; height: auto; display: block; 
-            opacity: 0; transition: opacity 0.5s ease;
-        }
-        .item img.loaded { opacity: 1; }
-
-        .item video {
-            width: 100%; height: auto; display: block;
+        .founder-image img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            object-position: top; /* Keeps heads visible */
+            filter: grayscale(100%);
+            transition: filter 0.6s ease;
         }
+        .founder-image:hover img { filter: grayscale(0%); }
 
-        /* --- 4. LIGHTBOX --- */
-        .lightbox {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.98); z-index: 2000;
-            display: none; justify-content: center; align-items: center;
-        }
-        .lb-content { position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
-        
-        .lb-content img { max-width: 95%; max-height: 85vh; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
-        .lb-content video { max-width: 90%; max-height: 85vh; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); outline: none; }
 
-        .lb-ctrl {
-            position: absolute; width: 50px; height: 50px; background: #fff;
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1); cursor: pointer; color: #333;
-            font-size: 1.5rem; transition: transform 0.2s, color 0.2s; z-index: 2001;
-        }
-        .lb-close { top: 30px; right: 30px; }
-        .lb-prev { top: 50%; left: 30px; transform: translateY(-50%); }
-        .lb-next { top: 50%; right: 30px; transform: translateY(-50%); }
+        /* --- 8. FOOTER --- */
+        footer { padding: 140px 5% 40px; text-align: center; background-color: white; border-top: 1px solid #f0f0f0; }
+        .footer-cta h2 { font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1.1; margin-bottom: 40px; font-weight: 400; }
+        .footer-cta .text-black { color: var(--rich-black); }
+        .footer-cta .text-magenta { color: var(--noxha-magenta); }
+        .footer-contact-links { margin-bottom: 120px; font-family: 'Manrope'; font-weight: 700; font-size: 1rem; letter-spacing: 0.05em; }
+        .contact-link { text-decoration: none; color: var(--rich-black); transition: color 0.3s; }
+        .contact-link:hover { color: var(--noxha-magenta); }
+        .contact-link .bracket { color: var(--noxha-magenta); font-weight: 700; margin: 0 5px; }
+        .separator { margin: 0 20px; color: #ccc; }
+        .footer-divider { height: 1px; background-color: #EAEAEA; width: 100%; margin-bottom: 30px; }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: flex-end; text-align: left; font-family: 'Manrope'; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--rich-black); text-transform: uppercase; font-weight: 700; }
+        .footer-location strong { display: block; font-weight: 800; margin-bottom: 5px; }
+        .footer-location span { color: #888; font-weight: 500; }
+        .footer-social a { text-decoration: none; color: var(--rich-black); border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+        .footer-social a:hover { border-bottom-color: var(--noxha-magenta); color: var(--noxha-magenta); }
 
-        /* --- 5. ABOUT PANEL --- */
-        .about-panel {
-            position: fixed; top: 0; left: 0; width: 100%; height: 0;
-            background: #fff; z-index: 150; overflow: hidden;
-            transition: height 0.5s cubic-bezier(0.7, 0, 0.3, 1);
-            border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            overflow-y: auto; 
-        }
-        .about-panel.open { height: 600px; }
-        
-        .about-inner {
-            max-width: 900px; margin: 0 auto; padding: 80px 20px;
-            display: flex; flex-direction: row; gap: 60px; 
-            align-items: center; justify-content: center;
-        }
-        
-        .profile-pic { 
-            width: 220px; height: 220px; border-radius: 30px; 
-            object-fit: cover; box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
-            border: 6px solid #fff; flex-shrink: 0;
-        }
-        
-        .bio { max-width: 500px; text-align: left; }
-        .bio h2 { margin-bottom: 20px; font-weight: 700; font-size: 2.2rem; color: var(--text-main); }
-        .bio p { color: #555; font-size: 1rem; line-height: 1.7; margin-bottom: 15px; }
-        
-        .contact-btn {
-            display: inline-block; text-decoration: none; padding: 12px 30px; background: var(--brand-blue); color: #fff;
-            border-radius: var(--radius-pill); font-weight: 600; box-shadow: 0 10px 20px rgba(0, 99, 140, 0.3); transition: transform 0.2s; margin-right: 10px; margin-top: 10px;
-        }
-        .contact-btn.secondary { background: #f0f2f5; color: #555; box-shadow: none; }
-
-        /* --- RESPONSIVE CONFIGURATION --- */
-        @media (max-width: 1100px) {
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 900px) {
+            /* Founders Mobile */
+            .founders-list { gap: 60px; }
+            .founder-row { flex-direction: column; gap: 30px; }
+            .founder-row:nth-child(even) { flex-direction: column; } /* No reverse on mobile, image always below text */
+            .founder-image { height: 450px; width: 100%; }
+            .founder-header { flex-direction: column; align-items: flex-start; gap: 5px; } /* Stack name/role */
             
-            /* Smaller logo on mobile hero */
-            .hero-logo { width: 180px; }
-
-            nav { padding: 15px 20px; }
-            .about-btn { font-size: 0.8rem; }
-
-            .menu-container { 
-                position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
-                background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
-                padding: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
-                z-index: 90; width: 90%; justify-content: center; 
-                border: 1px solid rgba(0,0,0,0.05);
-            }
-            .cat-btn { padding: 10px 10px; font-size: 0.75rem; } 
-            
-            .gallery-container { padding: 10px 10px 100px; }
-            .masonry-wrapper { gap: 10px !important; }
-            .masonry-col { gap: 10px !important; }
-            .masonry-wrapper.wide-gap { gap: 10px !important; }
-            .masonry-wrapper.wide-gap .masonry-col { gap: 10px !important; }
-
-            .about-panel.open { height: 100vh; border-radius: 0; }
-            .about-inner { flex-direction: column; text-align: center; padding: 80px 20px 100px; gap: 30px; }
-            .bio { text-align: center; }
-            .profile-pic { width: 180px; height: 180px; }
-
-            .lb-prev, .lb-next { display: none; }
-            .lb-content img { max-width: 100%; }
-            .lb-content video { max-width: 100%; }
+            /* Other Mobile Fixes */
+            .design-grid { grid-template-columns: 1fr; }
+            .reels-grid { grid-template-columns: repeat(2, 1fr); }
+            .masonry-grid { column-count: 1; }
+            .nav-links { display: none; }
+            .hero-buttons { gap: 20px; flex-direction: column; }
+            .hero-separator { max-width: 100%; font-size: 0.7rem; }
+            .footer-bottom { flex-direction: column; align-items: center; gap: 30px; text-align: center; }
+            .separator { display: none; }
+            .footer-contact-links { display: flex; flex-direction: column; gap: 20px; }
+            .section-header h2 { font-size: 2.5rem; }
+            .footer-cta h2 { font-size: 3rem; }
+            .service-row { flex-direction: column; align-items: flex-start; gap: 20px; padding: 40px 0; }
+            .service-mid { padding: 0; }
+            .service-right { width: 100%; justify-content: flex-start; margin-top: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <header class="hero" id="home">
-        <img src="logo.png" alt="Raghav Kulkarni" class="hero-logo">
-        <div class="scroll-hint">Scroll to Enter</div>
-    </header>
-
-    <div class="about-panel" id="aboutPanel">
-        <div class="lb-ctrl lb-close" onclick="toggleAbout()">✕</div>
-        <div class="about-inner">
-            <img src="profile.jpg" class="profile-pic">
-            <div class="bio">
-                <h2>Raghav Kulkarni</h2>
-                <p>More than a photographer, I am a visual artist dedicated to translating concepts into tangible imagery.</p>
-                <p>A graduate of MIT WPU (BA Photography), I apply a conceptual and minimalistic approach within a controlled environment. I use light, composition, and technical precision to convert abstract ideas into high-impact commercial visuals.</p>
-                <div>
-                    <a href="mailto:raghavkulkarniphotography@gmail.com" class="contact-btn">Email Me</a>
-                    <a href="tel:+918888248590" class="contact-btn secondary">Call</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <nav>
-        <div class="logo">
-            <img src="logo.png" alt="Raghav Kulkarni" onclick="window.scrollTo(0,0)">
+        <div class="logo"><img src="noxha-logo.png" alt="NOXHA"></div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#work">Portfolio</a>
+            <a href="#founders">Founders</a>
+            <a href="#contact">Contact</a>
         </div>
-        <div class="menu-container">
-            <button class="cat-btn active" onclick="loadGrid('product', this)">Product</button>
-            <button class="cat-btn" onclick="loadGrid('interior', this)">Interior</button>
-            <button class="cat-btn" onclick="loadGrid('corporate', this)">Corporate</button>
-            <button class="cat-btn" onclick="loadGrid('commercial', this)">Commercial</button>
-        </div>
-        <div class="about-btn" onclick="toggleAbout()">Info</div>
     </nav>
 
-    <main class="gallery-container">
-        <div class="masonry-wrapper" id="masonryWrapper">
-            <div class="masonry-col" id="col-1"></div>
-            <div class="masonry-col" id="col-2"></div>
-            <div class="masonry-col" id="col-3"></div>
+    <section class="hero">
+        <video autoplay muted playsinline class="hero-video">
+            <source src="fins noxha.mp4" type="video/mp4">
+        </video>
+        <div class="hero-separator">
+            <span>DESIGN | PHOTO | FILM</span>
         </div>
-    </main>
+        <p class="hero-description">
+            A concept-driven studio crafting brand's visual identities. Co-founded by a designer and a visual artist, NOXHA maps the gap between strategy and aesthetics, creating a distinct virtual identity through precision design and cinematic photography.
+        </p>
+        <div class="hero-buttons">
+            <a href="#contact" class="btn-inquire">
+                <span class="bracket">[</span> INQUIRE NOW <span class="bracket">]</span>
+            </a>
+            <a href="noxha-brochure.pdf" download class="btn-download">
+                DOWNLOAD BROCHURE <span style="font-size: 1.2rem; margin-left: 5px;">↓</span>
+            </a>
+        </div>
+    </section>
 
-    <div class="lightbox" id="lightbox">
-        <div class="lb-ctrl lb-close" onclick="closeLightbox()">✕</div>
-        <div class="lb-ctrl lb-prev" onclick="changeSlide(-1)">&#8249;</div>
-        <div class="lb-ctrl lb-next" onclick="changeSlide(1)">&#8250;</div>
-        <div class="lb-content" id="lbTouchArea">
-            <img src="" id="lbImg" style="display:none;">
-            <video src="" id="lbVid" controls style="display:none;"></video>
+    <section id="services" class="section-padding">
+        <div class="services-header-new">
+            <h2 class="services-title-main">[ SERVICES ]</h2>
+            <span class="services-subtitle">WHAT WE DO</span>
         </div>
-    </div>
+
+        <div class="services-list">
+            <div class="service-row">
+                <div class="service-left"><h3>Design</h3></div>
+                <div class="service-mid"><p>Brand Identity, Logo Systems, Packaging, UI/UX, and Catalogue design</p></div>
+                <div class="service-right"><div class="arrow-circle">→</div></div>
+            </div>
+            <div class="service-row">
+                <div class="service-left"><h3>Photography</h3></div>
+                <div class="service-mid"><p>Product, Portrait, and Lifestyle photography. Imagery that makes your brand feel premium.</p></div>
+                <div class="service-right"><div class="arrow-circle">→</div></div>
+            </div>
+            <div class="service-row">
+                <div class="service-left"><h3>Film</h3></div>
+                <div class="service-mid"><p>Brand story films, commercial shorts, and campaign direction. Motion that connects.</p></div>
+                <div class="service-right"><div class="arrow-circle">→</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="section-padding" style="background-color: #FAFAFA;">
+        <div class="section-header">
+            <h2>Selected Works</h2>
+            <span>02 — PORTFOLIO</span>
+        </div>
+
+        <div class="portfolio-subsection">
+            <h3 class="subsection-title">Photography (Raghav Kulkarni)</h3>
+            <div class="view-more-container" style="margin-bottom: 30px;">
+                <button class="view-btn" id="btn-photos" onclick="togglePhotos()">View Photography Portfolio</button>
+            </div>
+            <div class="masonry-grid" id="photo-grid">
+                <div class="masonry-item hide-item photo-item"><img src="photo1.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo2.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo3.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo4.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo5.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo6.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo7.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo8.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo9.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo10.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo11.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo12.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo13.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo14.jpg" alt="Work"></div>
+                <div class="masonry-item hide-item photo-item"><img src="photo15.jpg" alt="Work"></div>
+            </div>
+        </div>
+
+        <div class="portfolio-subsection">
+            <h3 class="subsection-title">Motion & Reels</h3>
+            <div class="view-more-container" style="margin-bottom: 30px;">
+                <button class="view-btn" id="btn-reels" onclick="toggleReels()">View Motion Portfolio</button>
+            </div>
+            <div class="reels-grid" id="reels-grid">
+                <div class="reel-item hide-item reel-item-class"><video controls playsinline><source src="reel1.mp4" type="video/mp4"></video></div>
+                <div class="reel-item hide-item reel-item-class"><video controls playsinline><source src="reel2.mp4" type="video/mp4"></video></div>
+                <div class="reel-item hide-item reel-item-class"><video controls playsinline><source src="reel3.mp4" type="video/mp4"></video></div>
+                <div class="reel-item hide-item reel-item-class"><video controls playsinline><source src="reel4.mp4" type="video/mp4"></video></div>
+                <div class="reel-item hide-item reel-item-class"><video controls playsinline><source src="reel5.mp4" type="video/mp4"></video></div>
+            </div>
+        </div>
+
+        <div class="portfolio-subsection">
+            <h3 class="subsection-title">Strategic Design (Bhakti Kulkarni)</h3>
+            <div class="view-more-container" style="margin-bottom: 30px;">
+                <button class="view-btn" id="btn-design" onclick="toggleDesign()">View Design Portfolio</button>
+            </div>
+            <div class="design-grid" id="design-grid">
+                <div class="design-item hide-item design-item-class"><img src="design1.jpg" alt="Design"><div class="design-caption">PROJECT ONE</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design2.jpg" alt="Design"><div class="design-caption">PROJECT TWO</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design3.jpg" alt="Design"><div class="design-caption">PROJECT THREE</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design4.jpg" alt="Design"><div class="design-caption">PROJECT FOUR</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design5.jpg" alt="Design"><div class="design-caption">PROJECT FIVE</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design6.jpg" alt="Design"><div class="design-caption">PROJECT SIX</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design7.jpg" alt="Design"><div class="design-caption">PROJECT SEVEN</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design8.jpg" alt="Design"><div class="design-caption">PROJECT EIGHT</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design9.jpg" alt="Design"><div class="design-caption">PROJECT NINE</div></div>
+                <div class="design-item hide-item design-item-class"><img src="design10.jpg" alt="Design"><div class="design-caption">PROJECT TEN</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="founders" class="section-padding">
+        <div class="services-header-new" style="margin-bottom: 80px;">
+            <h2 class="services-title-main">[ THE TEAM ]</h2>
+            <span class="services-subtitle">FOUNDERS</span>
+        </div>
+
+        <div class="founders-list">
+            
+            <div class="founder-row">
+                <div class="founder-text">
+                    <div class="founder-header">
+                        <h3 class="founder-name">Bhakti Kulkarni</h3>
+                        <span class="founder-role">DESIGNER</span>
+                    </div>
+                    <p class="founder-bio">
+                        With a foundation from NID Ahmedabad, Bhakti leads the design philosophy at NOXHA. She specializes in translating complex brand values into clear, systematic visual identities. Her work spans brand systems, packaging, and editorial design, always prioritizing cultural sensitivity and intricate craftsmanship.
+                    </p>
+                </div>
+                <div class="founder-image">
+                    <img src="bhakti.jpg" alt="Bhakti Kulkarni">
+                </div>
+            </div>
+
+            <div class="founder-row">
+                <div class="founder-text">
+                    <div class="founder-header">
+                        <h3 class="founder-name">Raghav Kulkarni</h3>
+                        <span class="founder-role">VISUAL ARTIST</span>
+                    </div>
+                    <p class="founder-bio">
+                        A graduate of MIT Pune, Raghav bridges the gap between technical photography and creative direction. As a Visual Artist, he focuses on atmospheric storytelling and controlled lighting to create cinematic imagery. He ensures that every frame—whether still or moving—serves the larger brand narrative.
+                    </p>
+                </div>
+                <div class="founder-image">
+                    <img src="raghav.jpg" alt="Raghav Kulkarni">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-cta">
+            <h2>
+                <span class="text-black">YOUR ROADMAP TO</span><br>
+                <span class="text-magenta">VISUAL IDENTITY.</span>
+            </h2>
+            
+            <div class="footer-contact-links">
+                <a href="mailto:studionoxha@gmail.com" class="contact-link">
+                    <span class="bracket">[</span> studionoxha@gmail.com <span class="bracket">]</span>
+                </a>
+                <span class="separator">|</span>
+                <a href="tel:+919421586636" class="contact-link">
+                    <span class="bracket">[</span> +91 9421586636 <span class="bracket">]</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+            <div class="footer-location">
+                <strong>PUNE, INDIA</strong>
+                <span>AVAILABLE WORLDWIDE</span>
+            </div>
+            
+            <div class="footer-social">
+                <a href="https://www.instagram.com/studionoxha/" target="_blank">INSTAGRAM</a>
+            </div>
+            
+            <div class="footer-copyright">
+                © 2026 NOXHA STUDIO.
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // --- DATA ---
-        function generatePaths(prefix, count, ext) {
-            var paths = [];
-            for (var i = 1; i <= count; i++) { paths.push(prefix + i + ext); }
-            return paths;
-        }
+        function togglePhotos() {
+            var items = document.querySelectorAll('.photo-item');
+            var btn = document.getElementById('btn-photos');
+            var isHidden = items[0].classList.contains('hide-item');
 
-        const portfolioData = {
-            product: generatePaths('product', 22, '.webp'),   
-            interior: generatePaths('interior', 12, '.webp'), 
-            corporate: generatePaths('corporate', 6, '.webp'),
-            commercial: generatePaths('commercial', 5, '.mp4') 
-        };
-
-        let currentCategoryImages = [];
-        let currentImageIndex = 0;
-        let activeCategory = 'product';
-
-        window.onload = function() {
-            loadGrid('product', document.querySelector('.cat-btn'));
-            
-            window.addEventListener('resize', () => {
-                 loadGrid(activeCategory, null); 
-            });
-        };
-
-        // --- GRID LOGIC ---
-        function loadGrid(cat, btn) {
-            activeCategory = cat;
-            if(btn) {
-                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-            }
-            
-            const isMobile = window.innerWidth <= 1100;
-            
-            const wrapper = document.getElementById('masonryWrapper');
-            if (!isMobile && (cat === 'interior' || cat === 'corporate' || cat === 'commercial')) {
-                wrapper.classList.add('wide-gap');
+            if (isHidden) {
+                items.forEach(i => i.classList.remove('hide-item'));
+                btn.innerHTML = "Close Photography";
             } else {
-                wrapper.classList.remove('wide-gap');
+                items.forEach(i => i.classList.add('hide-item'));
+                btn.innerHTML = "View Photography Portfolio";
             }
-
-            currentCategoryImages = portfolioData[cat];
-            
-            const col1 = document.getElementById('col-1');
-            const col2 = document.getElementById('col-2');
-            const col3 = document.getElementById('col-3');
-            
-            col1.innerHTML = ''; col2.innerHTML = ''; col3.innerHTML = '';
-            
-            currentCategoryImages.forEach((url, i) => {
-                const item = document.createElement('div');
-                item.className = 'item';
-                
-                if (cat === 'commercial') {
-                    const vid = document.createElement('video');
-                    vid.src = url;
-                    vid.muted = true;
-                    vid.autoplay = true;
-                    vid.loop = true;
-                    vid.playsInline = true;
-                    vid.onclick = () => openLightbox(i);
-                    item.appendChild(vid);
-                } else {
-                    const img = new Image();
-                    img.src = url; img.loading = "lazy";
-                    img.onload = () => img.classList.add('loaded');
-                    img.onclick = () => openLightbox(i);
-                    item.appendChild(img);
-                }
-                
-                if (isMobile) {
-                    if (i % 2 === 0) col1.appendChild(item);
-                    else col2.appendChild(item);
-                    col3.style.display = 'none';
-                } else {
-                    col3.style.display = 'flex';
-                    const remainder = i % 3;
-                    if(remainder === 0) col1.appendChild(item);
-                    else if(remainder === 1) col2.appendChild(item);
-                    else col3.appendChild(item);
-                }
-            });
-            
-            // OPTIONAL: Scroll past hero on click (if you want category click to auto-scroll)
-            // if(btn) { document.querySelector('nav').scrollIntoView(); }
         }
 
-        // --- LIGHTBOX LOGIC ---
-        function openLightbox(index) {
-            currentImageIndex = index;
-            updateLightbox();
-            document.getElementById('lightbox').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; 
-        }
+        function toggleReels() {
+            var items = document.querySelectorAll('.reel-item-class');
+            var btn = document.getElementById('btn-reels');
+            var isHidden = items[0].classList.contains('hide-item');
 
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-            document.body.style.overflow = 'auto'; 
-            const vidPlayer = document.getElementById('lbVid');
-            vidPlayer.pause();
-            vidPlayer.src = "";
-        }
-
-        function changeSlide(direction) {
-            currentImageIndex += direction;
-            if(currentImageIndex < 0) currentImageIndex = currentCategoryImages.length - 1;
-            if(currentImageIndex >= currentCategoryImages.length) currentImageIndex = 0;
-            updateLightbox();
-        }
-
-        function updateLightbox() {
-            const lbImg = document.getElementById('lbImg');
-            const lbVid = document.getElementById('lbVid');
-            const currentUrl = currentCategoryImages[currentImageIndex];
-
-            if (activeCategory === 'commercial') {
-                lbImg.style.display = 'none';
-                lbVid.style.display = 'block';
-                lbVid.src = currentUrl;
-                lbVid.play();
+            if (isHidden) {
+                items.forEach(i => i.classList.remove('hide-item'));
+                btn.innerHTML = "Close Motion";
             } else {
-                lbVid.style.display = 'none';
-                lbVid.pause();
-                lbImg.style.display = 'block';
-                lbImg.src = currentUrl;
+                items.forEach(i => i.classList.add('hide-item'));
+                btn.innerHTML = "View Motion Portfolio";
             }
         }
 
-        // --- TOUCH SWIPE ---
-        let touchStartX = 0; 
-        const lbArea = document.getElementById('lbTouchArea');
-        lbArea.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
-        lbArea.addEventListener('touchend', e => {
-            if (touchStartX - e.changedTouches[0].screenX > 50) changeSlide(1);
-            if (e.changedTouches[0].screenX - touchStartX > 50) changeSlide(-1);
-        });
+        function toggleDesign() {
+            var items = document.querySelectorAll('.design-item-class');
+            var btn = document.getElementById('btn-design');
+            var isHidden = items[0].classList.contains('hide-item');
 
-        function toggleAbout() {
-            document.getElementById('aboutPanel').classList.toggle('open');
-        }
-
-        document.addEventListener('keydown', e => {
-            if(document.getElementById('lightbox').style.display === 'flex') {
-                if(e.key === "Escape") closeLightbox();
-                if(e.key === "ArrowRight") changeSlide(1);
-                if(e.key === "ArrowLeft") changeSlide(-1);
+            if (isHidden) {
+                items.forEach(i => i.classList.remove('hide-item'));
+                btn.innerHTML = "Close Design";
+            } else {
+                items.forEach(i => i.classList.add('hide-item'));
+                btn.innerHTML = "View Design Portfolio";
             }
-        });
+        }
     </script>
 </body>
-</html>
+</html>	
